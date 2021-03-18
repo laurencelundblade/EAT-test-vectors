@@ -1,0 +1,29 @@
+March 2021
+A rough start at a collection of EAT tokens for testing
+
+The tokens are one per file in the src directory
+
+The .diag files describe the tokens in CBOR diag format. The
+diag-format comments, the ones between '/' and '/' describe
+the token and its testing use.
+
+The .c files descibe the token as a C string. The .diag 
+files are preferred but can't represent tokens with truly
+malformed and invalid CBOR that is needed for some tests.
+
+The script script/t2c.sh will take the .diag files and .c files
+and make a .c and .h file out of them that contains a byte
+array for each token. This is good for testing embedded C
+implementations of EAT.
+
+A script should be authored that takes the .c and .diag files
+and makes an individual CBOR-format token file out of each.
+This should be straight forward
+
+It should be possible to author scripts for other test uses.
+
+There should be a script to use the cddl tool and cddl from
+the EAT RFC to check some of the .diag format tokens. All
+can't be checked because some will be malformed input that
+is legal CBOR, but not legal EAT.
+
