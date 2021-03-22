@@ -1,0 +1,8 @@
+/ Both types of submod is incorrectly an array, rather than a map and string /
+{
+  20: {
+    "submod": [],
+    "nested": []
+  }
+}
+
