@@ -1,0 +1,4 @@
+/ The valid secboot claim with a value of true /
+{
+  15: true
+}
