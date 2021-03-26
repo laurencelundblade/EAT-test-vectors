@@ -1,4 +1,4 @@
-/ The valid secboot claim with a value of false /
+/ A valid secboot claim with a value of false /
 {
   15: false
 }
