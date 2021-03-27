@@ -1,4 +1,10 @@
-/ Ten levels of submodules with a distinct nonce at each level /
+/ Five nested levels of submodules with a distinct nonce at each level. /
+/ Each level also has a nested token. TODO: make the nested tokens real /
+/ A good test to perform on this is to traverse the whole tree getting /
+/ the nonces and the nested tokens and validating their values. /
+/ Note that nested tokens must be signed. They can't be UCCS per /
+/ the EAT standard, so when this is filled in they will be larger /
+/ and not so straight forward to validate /
 {
   10: h'0000',
   20: {
@@ -15,41 +21,21 @@
                   10: h'0404',
                   20: {
                     "sub5": {
-                      10: h'0505',
-                      20: {
-                        "sub6": {
-                          10: h'0606',
-                          20: {
-                            "sub7": {
-                              10: h'0707',
-                              20: {
-                                "sub8": {
-                                  10: h'0808',
-                                  20: {
-                                    "sub9": {
-                                      10: h'0909',
-                                      20: {
-                                        "sub10": {
-                                          10: h'0a0a'
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
+                      10: h'0505'
+                    },
+                    "token5": h'5555555555'
                   }
-                }
+                },
+                "token4": h'4444444444'
               }
-            }
+            },
+            "token3": h'3333333333'
           }
-        }
+        },
+        "token2": h'2222222222'
       }
-    }
+    },
+    "token1": h'1111111111'
   }
 }
            
