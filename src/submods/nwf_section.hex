@@ -1,6 +1,6 @@
-# The submod section is an integer lacking its CBOR argument. That is the
-# integer is truncated. The CBOR decoder should find that the submodules
-# section is not well formed. 
+# The submod section is an integer with an indefinite length instead
+# of a map.  Such an integer is not well formed (and not really an
+# integer). Decoders should error out on this.
 
 a1 
   14   1f 
