@@ -78,7 +78,7 @@ for i in $@; do
                 echo >> $header_file
 
                 # Add to the C file
-                echo "const unsigned char ${name}_token[] {" >> $c_file
+                echo "const unsigned char ${name}_token[] = {" >> $c_file
                 grep  -v '^#' $i | xxd -r -p |xxd -i >> $c_file
                 echo "};" >> $c_file 
                 echo >> $c_file
