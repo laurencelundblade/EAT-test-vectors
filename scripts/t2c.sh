@@ -43,7 +43,7 @@ for i in $@; do
             sed -e 's/\//\/\*/' -e 's/\/ *$/\*\//' >> $header_file 
         echo "extern const unsigned char ${name}_token[];" >> $header_file
         size=`diag2cbor.rb $i | wc -c | tr -d ' '`
-        echo "#define ${name}_SIZE $size" >> $header_file
+        echo "#define ${name}_token_size $size" >> $header_file
         echo >> $header_file
         echo >> $header_file
         #TODO: include the diag in the header file as a comment
@@ -62,7 +62,7 @@ for i in $@; do
             sed -e 's/^/extern /' | sed -e 's/=.*$/;/' >> $header_file
             cpp $i | grep -v '^#' | xxd -r -p > /tmp/count
             size=`cat /tmp/count | wc -c`
-            echo "#define ${name}_SIZE $size" >> $header_file
+            echo "#define ${name}_token_size $size" >> $header_file
             echo >> $header_file
             echo >> $header_file
 
