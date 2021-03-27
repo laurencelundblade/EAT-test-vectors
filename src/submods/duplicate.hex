@@ -1,6 +1,6 @@
 # This has two submods labeled "submod" and two nested tokens labeled
 # "nested".  A map with two items with the same label is considered
-# invalid in CBORi This is good for testing duplicate detection. A
+# invalid in CBOR. This is good for testing duplicate detection. A
 # decoder should error out on this.
 
   a1 
