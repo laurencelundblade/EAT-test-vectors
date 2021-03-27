@@ -1,0 +1,8 @@
+/ This has a submod section with two simple submodules /
+/ One is empty and the other is a nested JSON token /
+{
+  20:{
+     h'010203': {},
+     h'040506': "{\"ueid\", \"xyz\"}"
+  }
+}

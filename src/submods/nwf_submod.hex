@@ -1,0 +1,7 @@
+# The submod named "submod" is an not-allowed form of positive integer.
+# It is the byte 1f a positive integer with indefinite length.
+
+a1
+  14   a1 
+    66 73 75 62 6d 6f 64   1f 
+

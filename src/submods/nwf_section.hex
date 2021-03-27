@@ -1,0 +1,7 @@
+# The submod section is an integer lacking its CBOR argument. That is the
+# integer is truncated. The CBOR decoder should find that the submodules
+# section is not well formed. 
+
+a1 
+  14   1f 
+

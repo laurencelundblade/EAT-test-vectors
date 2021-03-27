@@ -1,0 +1,7 @@
+/ An empty submodule (which is of course legal) /
+{
+  20: {      
+    "submod": {
+    }
+  }
+}
