@@ -20,20 +20,30 @@ EOC
 
 for i in $@; do
 
-    n1=$(basename $i)
-    echo "n1 $n1"
-    name=${n1%.*}
+    # Process the path name down to a variable name
+    f1=$(basename $i)
+    file=${f1%.*}
+
+    full_path=$(dirname $i)
+    last_path=$(basename $full_path)
+   
+    if [[ $last_path == $full_path ]] ; then
+        name=$file
+    else
+        name=${last_path}_${file}
+    fi
+    echo "processing $name"
 
     if [[ $i == *.diag ]] ; then
+        # TODO: error checking and reporting for bad diag input
+        # Right not it just encodes error text as token
 
-    # TODO: error checking and reporting for bad diag
-
-    # Add to the header file
+        # Add to the header file
         grep '^ */.*/ *$' $i | \
             sed -e 's/\//\/\*/' -e 's/\/ *$/\*\//' >> $header_file 
-        echo "extern const char ${name}_token[];" >> $header_file
+        echo "extern const unsigned char ${name}_token[];" >> $header_file
         size=`diag2cbor.rb $i | wc -c | tr -d ' '`
-        echo "#define ${name}_SIZE $size" >> $header_file
+        echo "#define ${name}_token_size $size" >> $header_file
         echo >> $header_file
         echo >> $header_file
         #TODO: include the diag in the header file as a comment
@@ -45,19 +55,36 @@ for i in $@; do
         diag2cbor.rb $i | xxd -i >> $c_file
         echo "};" >> $c_file
 
-    else if [[ $i == *.c ]] ; then
-        grep 'const.*char.* [a-z].*\[\]' $i |\
-        sed -e 's/^/extern /' | sed -e 's/=.*$/;/' >> $header_file
-        cpp $i | grep -v '^#' | xxd -r -p > /tmp/count
-        size=`cat /tmp/count | wc -c`
-        echo "#define ${name}_SIZE $size" >> $header_file
-        echo >> $header_file
-        echo >> $header_file
+    else 
+        if [[ $i == *.c ]] ; then
+            # TODO: deprecate support for .c
+            grep 'const.*char.* [a-z].*\[\]' $i |\
+            sed -e 's/^/extern /' | sed -e 's/=.*$/;/' >> $header_file
+            cpp $i | grep -v '^#' | xxd -r -p > /tmp/count
+            size=`cat /tmp/count | wc -c`
+            echo "#define ${name}_token_size $size" >> $header_file
+            echo >> $header_file
+            echo >> $header_file
 
-        cat $i >> $c_file
-    fi
-    fi
+            cat $i >> $c_file
 
+        else 
+            if [[ $i == *.hex ]] ; then
+                # Add to the header file
+                grep '^#' $i | sed -e 's/^#/\/\*/' -e 's/$/ \*\//' >> $header_file
+                echo "extern const unsigned char ${name}_token[];" >> $header_file
+                size=`grep  -v '^#' $i | xxd -r -p | wc -c`
+                echo "#define ${name}_token_size $size" >> $header_file
+                echo >> $header_file
+
+                # Add to the C file
+                echo "const unsigned char ${name}_token[] = {" >> $c_file
+                grep  -v '^#' $i | xxd -r -p |xxd -i >> $c_file
+                echo "};" >> $c_file 
+                echo >> $c_file
+            fi
+        fi
+    fi
 done
 
 
