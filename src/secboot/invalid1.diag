@@ -1,0 +1,6 @@
+/ The secboot claim with a value of null which is not allowed. There are /
+/  many ways secboot can be invalid. This is just one. It is picked because /
+/ it is very similar to the value of true and false, but still invalid. /
+{
+  15: null
+}

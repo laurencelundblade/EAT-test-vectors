@@ -1,0 +1,5 @@
+/ A secboot claim with value the text "false". It is supposed to be a /
+/ true Boolean value, not a text string. /
+{
+  15: "false"
+}

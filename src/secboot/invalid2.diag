@@ -1,0 +1,6 @@
+/ A secboot claim with a value that is an integer which is not allowed. /
+/ There are  many ways secboot can be invalid. This is just one. /
+/ It is picked because some might consider the integer 0 to be false. /
+{
+  15: 0 
+}
