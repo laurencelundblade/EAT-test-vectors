@@ -1,0 +1,5 @@
+/ A valid secboot claim with a value of false /
+/ The expected results from decoding this is the value false /
+{
+  15: false
+}
