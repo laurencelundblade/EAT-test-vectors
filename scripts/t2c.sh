@@ -8,6 +8,10 @@ cat <<EOC > $header_file
  * files by the script t2c.sh. 
  */
 
+
+/* Useful macro to convert test to a UsefulBuf */
+#define TEST2UB(test_name) ((struct q_useful_buf_c){test_name##_bytes, test_name##_size})
+
 EOC
 
 cat <<EOC > $c_file
@@ -41,9 +45,9 @@ for i in $@; do
         # Add to the header file
         grep '^ */.*/ *$' $i | \
             sed -e 's/\//\/\*/' -e 's/\/ *$/\*\//' >> $header_file 
-        echo "extern const unsigned char ${name}_token[];" >> $header_file
+        echo "extern const unsigned char ${name}_bytes[];" >> $header_file
         size=`diag2cbor.rb $i | wc -c | tr -d ' '`
-        echo "#define ${name}_token_size $size" >> $header_file
+        echo "#define ${name}_size $size" >> $header_file
         echo >> $header_file
         echo >> $header_file
         #TODO: include the diag in the header file as a comment
@@ -51,7 +55,7 @@ for i in $@; do
 
         # Add to the C file
         echo >> $c_file
-        echo  "const unsigned char ${name}_token[] = {" >> $c_file
+        echo  "const unsigned char ${name}_bytes[] = {" >> $c_file
         diag2cbor.rb $i | xxd -i >> $c_file
         echo "};" >> $c_file
 
@@ -62,7 +66,7 @@ for i in $@; do
             sed -e 's/^/extern /' | sed -e 's/=.*$/;/' >> $header_file
             cpp $i | grep -v '^#' | xxd -r -p > /tmp/count
             size=`cat /tmp/count | wc -c`
-            echo "#define ${name}_token_size $size" >> $header_file
+            echo "#define ${name}_size $size" >> $header_file
             echo >> $header_file
             echo >> $header_file
 
@@ -72,13 +76,13 @@ for i in $@; do
             if [[ $i == *.hex ]] ; then
                 # Add to the header file
                 grep '^#' $i | sed -e 's/^#/\/\*/' -e 's/$/ \*\//' >> $header_file
-                echo "extern const unsigned char ${name}_token[];" >> $header_file
+                echo "extern const unsigned char ${name}_bytes[];" >> $header_file
                 size=`grep  -v '^#' $i | xxd -r -p | wc -c`
-                echo "#define ${name}_token_size $size" >> $header_file
+                echo "#define ${name}_size $size" >> $header_file
                 echo >> $header_file
 
                 # Add to the C file
-                echo "const unsigned char ${name}_token[] = {" >> $c_file
+                echo "const unsigned char ${name}_bytes[] = {" >> $c_file
                 grep  -v '^#' $i | xxd -r -p |xxd -i >> $c_file
                 echo "};" >> $c_file 
                 echo >> $c_file

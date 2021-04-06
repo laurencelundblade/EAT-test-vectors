@@ -37,3 +37,15 @@ the EAT RFC to check some of the .diag format tokens. All
 can't be checked because some will be malformed input that
 is legal CBOR, but not legal EAT.
 
+Here's the file naming convention:
+
+    TESTVECTOR = BASEDIR "/" ( "valid" / "invalid" ) "_" SYNOPSIS "." EXT
+    BASEDIR = "src" "/" ( CLAIMNAME / FEATURE )
+    CLAIMNAME = <the list of EAT claims>
+    FEATURE = <a list of feaures or areas to test that are not claims>
+    SYNOPSIS = 1* ( ALPHA / "_" / DIGIT ) 
+    EXT = "diag" / "hex"
+
+E.g.:
+* src/euid/valid_rand_type.diag
+* src/euid/invalid_unknown_type.diag
