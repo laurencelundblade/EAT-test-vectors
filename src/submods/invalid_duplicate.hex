@@ -1,0 +1,25 @@
+# This has two submods labeled "submod" and two nested tokens labeled
+# "nested".  A map with two items with the same label is considered
+# invalid in CBOR. This is good for testing duplicate detection. A
+# decoder should error out on this.
+
+  a1 
+    14
+      a4
+# The first occurance of "submod"
+      66 73 75 62 6d 6f 64 
+        a1
+          0a 42 0101
+# The first occurance of "nested"
+      66 6e 65 73 74 65 64 6f 7b
+        22 75 65 69 64 22 2c 20 22
+        78 79 7a 22 7d
+# The second occurance of "submod"
+      66 73 75 62 6d 6f 64 
+      a1 
+        0a 42 02 02
+# The second occurance of "nested"
+      66 6e 65 73 74 65 64 6f 7b
+        22 76 65 69 64 22 2c 20 22
+        78 79 7a 22 7d
+ 

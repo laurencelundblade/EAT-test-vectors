@@ -1,0 +1,7 @@
+# The submod section is an integer with an indefinite length instead
+# of a map.  Such an integer is not well formed (and not really an
+# integer). Decoders should error out on this.
+
+a1 
+  14   1f 
+

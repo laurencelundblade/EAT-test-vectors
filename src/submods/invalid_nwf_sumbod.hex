@@ -1,0 +1,9 @@
+# The submod named "submod" is an integer with an indefinite length
+# instead of a map.  Such an integer is not well formed (and not
+# really an integer). Decoders should error out on this.
+
+
+a1
+  14   a1 
+    66 73 75 62 6d 6f 64   1f 
+
