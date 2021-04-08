@@ -1,0 +1,14 @@
+/ This is invalid because it is missing the signer_id /
+/ This is just for testing the SW components claim in isolation. /
+/ When taken as a whole, this is actual an invalid PSA token because it is missing required claims /
+
+{
+  / psa-software-components /  -75006: [
+    {
+      / measurement type /  1: "PRoT",
+      / measurement value / 2: h'0506070805060708050607080506070805060708050607080506070805060708',
+      / version /           4: "1.4.6"
+      / measurement description / 6: "FrozbitzMeasurement"
+    }
+  ]
+}
