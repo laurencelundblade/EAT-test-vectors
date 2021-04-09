@@ -1,0 +1,4 @@
+/ A valid URI-format profile claim /
+{
+  18: "http://arm.com/psa/2.0.0" 
+}

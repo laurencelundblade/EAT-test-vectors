@@ -1,0 +1,5 @@
+/ A valid URI-format profile claim /
+/ 1.3.6.1.4.1.90000.4, a somewhat randomly picked OID for test prupose only /
+{
+  18: h'06092B0601040185BF1004'
+}
