@@ -1,0 +1,6 @@
+/ A valid URI-format profile claim /
+/ TODO: a better OID /
+/ TODO: document this better /
+{
+  18: h'608648016503040201'
+}
