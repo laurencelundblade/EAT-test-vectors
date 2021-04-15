@@ -1,6 +1,8 @@
-/ A basic valid PSA SW components claim. It has two SW components /
-/ This is just for testing the SW components claim in isolation. /
-/ When taken as a whole, this is actual an invalid PSA token because it is missing required claims /
+/ A basic valid PSA SW components claim. It has two SW components.     /
+/                                                                      /
+/ This is just for testing the SW components claim in isolation.  When /
+/ taken as a whole, this is actual an invalid PSA token because it is  /
+/ missing claims that PSA token requires in all tokens.                /
 
 {
   / psa-software-components /  -75006: [
@@ -12,8 +14,8 @@
     {
       / measurement type /  1: "PRoT",
       / measurement value / 2: h'0506070805060708050607080506070805060708050607080506070805060708',
-      / version /           4: "1.4.6"
-      / signer ID /         5: h'519200FF519200FF519200FF519200FF519200FF519200FF519200FF519200FF'
+      / version /           4: "1.4.6",
+      / signer ID /         5: h'519200FF519200FF519200FF519200FF519200FF519200FF519200FF519200FF',
       / measurement description / 6: "FrozbitzMeasurement"
     }
   ]

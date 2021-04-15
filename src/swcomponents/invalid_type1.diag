@@ -1,6 +1,4 @@
-/ This is invalid because it is missing the array level /
-/ This is just for testing the SW components claim in isolation. /
-/ When taken as a whole, this is actual an invalid PSA token because it is missing required claims /
+/ This is an invalid SW components because it is missing the array level. /
 
 {
   / psa-software-components /  -75006: {
