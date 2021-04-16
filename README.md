@@ -38,14 +38,40 @@ can't be checked because some will be malformed input that
 is legal CBOR, but not legal EAT.
 
 Here's the file naming convention:
-
+```
     TESTVECTOR = BASEDIR "/" ( "valid" / "invalid" ) "_" SYNOPSIS "." EXT
     BASEDIR = "src" "/" ( CLAIMNAME / FEATURE )
     CLAIMNAME = <the list of EAT claims>
     FEATURE = <a list of feaures or areas to test that are not claims>
     SYNOPSIS = 1* ( ALPHA / "_" / DIGIT ) 
     EXT = "diag" / "hex"
+```
 
 E.g.:
+
 * src/euid/valid_rand_type.diag
 * src/euid/invalid_unknown_type.diag
+
+# Docker
+
+To build the docker sandbox, do:
+```
+make build-docker
+```
+
+To enter the sandbox and run an interactive shell, do:
+```
+make run-docker
+```
+
+From within the sandbox, all the Makefile targets (e.g., `check`, `clean`,
+etc.) are directly available; e.g.:
+```
+sandbox# make check
+```
+
+In order to run a Makefile target in the sandbox from the host, add a `docker-`
+prefix, e.g.:
+```
+host$ make docker-check`
+```

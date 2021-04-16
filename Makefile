@@ -27,7 +27,7 @@ eat_cddl := eat.cddl
 CLEANFILES += $(eat_cddl)
 
 $(eat_cddl): $(eat_xml)
-	$(xpath) -n -q -e '//section[@anchor="collected-cddl"]//artwork/text()' $< \
+	$(xpath) -n -q -e '//section[@anchor="collected-cddl"]//sourcecode/text()' $< \
 		| sed -e 's/\&amp;/\&/g' \
 		> $@
 
@@ -56,3 +56,22 @@ check: $(eat_cddl) $(cbors)
 
 .PHONY: clean
 clean: ; $(RM) $(CLEANFILES)
+
+# docker
+docker_image := eat-test-sandbox
+docker_wdir := /root
+docker_run_it := docker run -it -w $(docker_wdir) -v $(shell pwd):$(docker_wdir) $(docker_image)
+
+build-docker: ; docker build -t $(docker_image) .
+.PHONY: build-docker
+
+run-docker: ; $(docker_run_it)
+.PHONY: run-docker
+
+# Execute any Makefile target into the docker sandbox
+# E.g., to run the "check" target in the sandbox, do:
+#   make docker-check
+# To run the "clean" target in the sandbox, do:
+#   make docker-clean
+docker-%:
+	$(docker_run_it) bash -c "make $(subst docker-,,$@)"
