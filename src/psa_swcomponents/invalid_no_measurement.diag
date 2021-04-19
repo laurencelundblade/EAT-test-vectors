@@ -1,0 +1,13 @@
+/ This is an invalid SW components claim because it is missing the /
+/ measurement value.                                               /
+
+{
+  / psa-software-components /  -75006: [
+    {
+      / measurement type /  1: "PRoT",
+      / version /           4: "1.4.6",
+      / signer ID /         5: h'519200FF519200FF519200FF519200FF519200FF519200FF519200FF519200FF',
+      / measurement description / 6: "FrozbitzMeasurement"
+    }
+  ]
+}

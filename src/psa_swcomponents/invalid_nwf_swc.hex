@@ -1,0 +1,10 @@
+# The value of the sw components claim is 0x1f, an integer with an
+# indefinite length. This not-well-formed CBOR should be caught
+# at the lowest layer in the decoder and bubbled up to some top-level
+# error. This is to test that path of bubbling up errors. There are
+# lots of other ways that CBOR can be invalid here. This is just one
+# to test the error propagation.
+
+A1            
+   3A 000124FD
+   1f 

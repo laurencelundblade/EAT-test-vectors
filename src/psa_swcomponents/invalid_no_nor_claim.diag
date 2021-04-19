@@ -1,0 +1,5 @@
+/ This is invalid because it has neither a sw components claim nor the    /
+/ indictor for no sw components.  It is just an empt token.               /
+
+{
+}

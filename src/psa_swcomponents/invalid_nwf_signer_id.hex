@@ -1,0 +1,19 @@
+# The value of the signer ID in sw components claim is 0x1f, an
+# integer with an indefinite length. This not-well-formed CBOR
+# should be caught at the lowest layer in the decoder and bubbled up
+# to some top-level error. This is to test that path of bubbling up
+# errors. There are lots of other ways that CBOR can be invalid
+# here. This is just one to test the error propagation.
+
+A1                                      # map(1)
+   3A 000124FD                          # negative(75005)
+   81                                   # array(1)
+      A3                                # map(3)
+         01                             # unsigned(1)
+         62                             # text(2)
+            424C                        # "BL"
+         02                             # unsigned(2)
+         58 20                          # bytes(32)
+            0001020400010204000102040001020400010204000102040001020400010204 # measurement value
+         05                             # unsigned(5)
+         1f

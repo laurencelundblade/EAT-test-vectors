@@ -1,0 +1,7 @@
+/ The only valid way to have no SW components.  This is just for testing /
+/ the no SW components claim in isolation.  When taken as a whole, this  /
+/ is actual an invalid PSA token because it is missing required claims   /
+
+{
+  / psa-no-sw-measurement /  -75007: 1
+}

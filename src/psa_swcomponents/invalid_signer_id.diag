@@ -1,0 +1,12 @@
+/ This is an invalid SW components claim because the signer ID is an /
+/ integer rather than a byte string. /
+
+{
+  / psa-software-components /  -75006: [
+    {
+      / measurement type /  1: "BL",
+      / measurement value / 2: h'0001020400010204000102040001020400010204000102040001020400010204',
+      / signer ID /         5: 44
+    }
+  ]
+}
