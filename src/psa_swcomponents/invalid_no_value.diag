@@ -1,0 +1,4 @@
+/ The value of the no sw components claim is 2 rather than 1 /
+{
+  / psa-no-sw-measurement /  -75007: 2
+}
