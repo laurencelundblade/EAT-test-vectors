@@ -1,0 +1,5 @@
+/ The no-sw-components claim is a boolean rather than an integer /
+
+{
+  / psa-no-sw-measurement /  -75007: true
+}
