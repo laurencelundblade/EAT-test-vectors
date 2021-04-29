@@ -1,0 +1,5 @@
+/ A valid HW device version claim /
+{
+  -76032: "1.4.5b",
+  -76035: 2
+}
