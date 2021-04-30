@@ -1,0 +1,4 @@
+/ EAN HW version is a byte string rather than a text string /
+{
+  -76039: h'01234567891234'
+}

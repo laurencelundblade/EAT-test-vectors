@@ -1,0 +1,5 @@
+/ An invalid HW Board version claim -- bstr instead of tstr /
+{
+  -76033: h'896423',
+  -76036: 3
+}
