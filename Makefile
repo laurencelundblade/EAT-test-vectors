@@ -1,10 +1,12 @@
-.DEFAULT_GOAL := check
+DEFAULT_GOAL := main
 
 # tools
 curl ?= curl
 xpath ?= xpath
 cddl ?= cddl
 diag2cbor ?= diag2cbor.rb
+xxd ?= xxd
+
 
 # upstream repo configuration
 eat_repo_baseurl ?= https://ietf-rats-wg.github.io/eat
@@ -19,6 +21,46 @@ ifeq ($(eat_repo_branch),)
 else
   eat_repo := $(eat_repo_baseurl)/$(eat_repo_branch)
 endif
+
+
+# A list of all diag files in the "src" directory
+diag_files := $(wildcard src/*.diag src/*/*.diag)
+
+# A corresponding list of all the cbor files in the "cbor" directory
+cbor_files := $(patsubst src/%,cbor/%,$(patsubst %.diag,%.cbor,$(diag_files)))
+
+# A list of all diag files in the "src" directory
+hex_files := $(wildcard src/*.hex src/*/*.hex)
+# A corresponding list of all the cbor files in the "cbor" directory
+cbor_files += $(patsubst src/%,cbor/%,$(patsubst %.hex,%.cbor,$(hex_files)))
+
+%.cbor :	%.diag
+	$(diag2cbor) $< > $@
+
+cbor/%.cbor :	src/%.diag
+	$(diag2cbor) $< > $@
+
+%.cbor	:	%.hex
+	grep  -v '^#' $< | $(xxd) -r -p > $@
+
+cbor/%.cbor	:	src/%.hex
+	grep  -v '^#' $< | $(xxd) -r -p > $@
+
+
+main: CBOR eat_test_tokens.c eat_test_tokens.h
+
+CBOR:	$(cbor_files)
+
+eat_test_tokens.c eat_test_tokens.h:	$(cbor_files) 
+	rm -f eat_test_tokens.c eat_test_tokens.h ; \
+	for f in $? ; do \
+                ./make_c_files.sh source $$f >> eat_test_tokens.c ; \
+                ./make_c_files.sh header $$f >> eat_test_tokens.h ; \
+	done 
+        
+
+CLEANFILES += $(cbor_files)
+CLEANFILES += eat_test_tokens.c eat_test_tokens.h
 
 eat_xml := draft-ietf-rats-eat.xml
 CLEANFILES += $(eat_xml)
@@ -75,3 +117,6 @@ run-docker: ; $(docker_run_it)
 #   make docker-clean
 docker-%:
 	$(docker_run_it) bash -c "make $(subst docker-,,$@)"
+
+
+
