@@ -60,7 +60,7 @@ eat_test_tokens.c eat_test_tokens.h:	$(cbor_files)
         
 
 CLEANFILES += $(cbor_files)
-CLEANFILES += eat_test_tokens.c
+CLEANFILES += eat_test_tokens.c eat_test_tokens.h
 
 eat_xml := draft-ietf-rats-eat.xml
 CLEANFILES += $(eat_xml)
