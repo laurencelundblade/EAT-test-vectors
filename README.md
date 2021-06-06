@@ -53,6 +53,20 @@ E.g.:
 * `src/euid/valid_rand_type.diag`
 * `src/euid/invalid_unknown_type.diag`
 
+# Make
+
+The source code is the .hex and .diag files in the src directory.
+The made files are the .cbor files in the cbor directory and
+xxx.c and xxx.h in the top level directory.
+
+The default make target is to just make these files.
+
+Make can also be invoked to validate the valid CBOR
+files against the EAT CDDL. When it does this it will
+fetch the EAT CDDL and invoke the needed CDDL tools.
+This requires a lot more tools, some of which may be
+more tempermental.  See next section on docker.
+
 # Docker
 
 To build the docker sandbox, do:
