@@ -51,8 +51,9 @@ main: CBOR eat_test_tokens.c eat_test_tokens.h
 
 CBOR:	$(cbor_files)
 
-eat_test_tokens.c eat_test_tokens.h:	$(cbor_files) 
-	rm -f eat_test_tokens.c eat_test_tokens.h ; \
+eat_test_tokens.c eat_test_tokens.h:	$(cbor_files)
+	./make_c_files.sh source_preamble > eat_test_tokens.c
+	./make_c_files.sh header_preamble > eat_test_tokens.h
 	for f in $? ; do \
                 ./make_c_files.sh source $$f >> eat_test_tokens.c ; \
                 ./make_c_files.sh header $$f >> eat_test_tokens.h ; \
