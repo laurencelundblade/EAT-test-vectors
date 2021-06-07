@@ -1,5 +1,12 @@
 DEFAULT_GOAL := main
 
+# TODO: 
+# Bring in comments and diag to the header file (this is in make_c_file.sh)
+# Fix the validation
+# This may have to pull in CDDL from other places than just EAT
+# Add lots of comments
+# Add more .PHONY targets
+
 # tools
 curl ?= curl
 xpath ?= xpath
@@ -29,7 +36,7 @@ diag_files := $(wildcard src/*.diag src/*/*.diag)
 # A corresponding list of all the cbor files in the "cbor" directory
 cbor_files := $(patsubst src/%,cbor/%,$(patsubst %.diag,%.cbor,$(diag_files)))
 
-# A list of all diag files in the "src" directory
+# A list of all hex files in the "src" directory
 hex_files := $(wildcard src/*.hex src/*/*.hex)
 # A corresponding list of all the cbor files in the "cbor" directory
 cbor_files += $(patsubst src/%,cbor/%,$(patsubst %.hex,%.cbor,$(hex_files)))
@@ -38,13 +45,15 @@ cbor_files += $(patsubst src/%,cbor/%,$(patsubst %.hex,%.cbor,$(hex_files)))
 	$(diag2cbor) $< > $@
 
 cbor/%.cbor :	src/%.diag
+	@mkdir -p $(@D)
 	$(diag2cbor) $< > $@
 
 %.cbor	:	%.hex
-	grep  -v '^#' $< | $(xxd) -r -p > $@
+	grep -v '^#' $< | $(xxd) -r -p > $@
 
 cbor/%.cbor	:	src/%.hex
-	grep  -v '^#' $< | $(xxd) -r -p > $@
+	@mkdir -p $(@D)
+	grep -v '^#' $< | $(xxd) -r -p > $@
 
 
 main: CBOR eat_test_tokens.c eat_test_tokens.h
@@ -58,7 +67,7 @@ eat_test_tokens.c eat_test_tokens.h:	$(cbor_files)
                 ./make_c_files.sh source $$f >> eat_test_tokens.c ; \
                 ./make_c_files.sh header $$f >> eat_test_tokens.h ; \
 	done 
-        
+
 
 CLEANFILES += $(cbor_files)
 CLEANFILES += eat_test_tokens.c eat_test_tokens.h
