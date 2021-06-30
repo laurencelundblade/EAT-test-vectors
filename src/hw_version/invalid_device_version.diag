@@ -1,5 +1,4 @@
 / An invalid HW device version claim; array instead of tstr /
 {
-  -76032: [1, 4, 5],
-  -76035: 2
+  -76032: [1, [1, 4, 5]]
 }

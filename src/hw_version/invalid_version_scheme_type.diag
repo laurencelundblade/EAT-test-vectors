@@ -1,5 +1,4 @@
 / Version scheme is invalid because it is 'true' rather than an integer /
 {
-  -76033: "153uX",
-  -76036: true
+  -76033: [true, "153uX"]
 }

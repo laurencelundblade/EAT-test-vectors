@@ -1,5 +1,4 @@
 / An invalid HW Chip version claim; float instead of tstr /
 {
-  -76034: 1.45,
-  -76037: 1
+  -76034: [1, 1.45]
 }

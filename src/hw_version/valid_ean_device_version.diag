@@ -1,4 +1,4 @@
 / A valid HW device EAN version claim /
 {
-  -76038: "0123456789123"
+  -76032: [5, "0123456789123"]
 }

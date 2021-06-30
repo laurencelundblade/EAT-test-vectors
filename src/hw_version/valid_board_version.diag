@@ -1,5 +1,4 @@
-/ A valid HW Board version claim /
+/ A valid HW Board version claim with version scheme 3, alphanumeric /
 {
-  -76033: "153uX",
-  -76036: 3
+  -76033: [3, "153uX"]
 }

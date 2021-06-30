@@ -1,5 +1,4 @@
-/ A valid HW Chip version claim /
+/ A valid HW Chip version claim, with version scheme 1, multipartnumeric / 
 {
-  -76034: "1.4.5",
-  -76037: 1
+  -76034: [ 1, "1.4.5" ]
 }

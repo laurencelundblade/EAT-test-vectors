@@ -1,5 +1,4 @@
-/ A valid HW Board version claim /
+/ invalid because the version scheme is not one that is registered /
 {
-  -76033: "153uX",
-  -76036: 3
+  -76033: [30, "153uX"]
 }

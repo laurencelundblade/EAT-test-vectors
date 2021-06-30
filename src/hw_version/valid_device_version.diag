@@ -1,5 +1,4 @@
-/ A valid HW device version claim /
+/ A valid HW device version claim, with version sceme 2, multipartnumeric-suffix /
 {
-  -76032: "1.4.5b",
-  -76035: 2
+  -76032: [ 2, "1.4.5b" ]
 }
